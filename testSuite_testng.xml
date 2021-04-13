@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <parameter name="browser" value="firefox"/>
+
+
+    <test name="Web Scraping">
+        <classes>
+            <class name="com.testclass.FindTopGainers"/>
+        </classes>
+    </test>
+
+    <listeners>
+        <listener class-name="utils.TestListenerReporter"/>
+    </listeners>
+
+
+</suite>
