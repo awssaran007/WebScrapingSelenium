@@ -18,6 +18,8 @@ public class LandingPage {
     List<String> stocks;
     List<String> values;
     Map newMap;
+    List finalKeys = stocks;
+    List finalValues = values;
 
     @FindBy(xpath = "//div[@id='topgain_bse']/descendant::tr/td[1]")
     List<WebElement> stocksPath;
@@ -30,7 +32,7 @@ public class LandingPage {
 
     public LandingPage(WebDriver driver) {
         pageWebDriver = new WebDriverClient(driver);
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
 
     public String gotoLandingPage(String url) {
@@ -39,16 +41,17 @@ public class LandingPage {
     }
 
 
-    public void scrapStockAndValues() {
-       stocks = stocksPath.stream().map(s -> s.getText()).collect(Collectors.toList());
-       values = valuesPath.stream().map(s -> s.getText()).collect(Collectors.toList());
-
-        List finalKeys = stocks;
-        List finalValues = values;
-        newMap = IntStream.range(0, stocks.size())
-                .collect(HashMap::new,
-                        (m, i) -> m.put(finalKeys.get(i), finalValues.get(i)),
-                        Map::putAll);
-        newMap.forEach((k, v) -> Reporter.log("stocks:" + k + " values: " + v));
+    public void scrapStockAndValues() throws Exception {
+        try {
+            stocks = stocksPath.stream().map(s -> s.getText()).collect(Collectors.toList());
+            values = valuesPath.stream().map(s -> s.getText()).collect(Collectors.toList());
+            newMap = IntStream.range(0, stocks.size())
+                    .collect(HashMap::new,
+                            (m, i) -> m.put(finalKeys.get(i), finalValues.get(i)),
+                            Map::putAll);
+            newMap.forEach((k, v) -> Reporter.log("stocks:" + k + " values: " + v));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

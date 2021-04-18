@@ -2,6 +2,7 @@ package core;
 
 import org.openqa.selenium.WebDriver;
 import pageFactory.LandingPage;
+import pageFactory.LandingPageNoon;
 import utils.WebDriverClient;
 
 public class Controller {
@@ -16,5 +17,8 @@ public class Controller {
         return new LandingPage(pageWebDriver.getWebDriverClient());
     }
 
-    //if we need to instantiate more pages
+    public LandingPageNoon landingPageNoon() {
+        return new LandingPageNoon(pageWebDriver.getWebDriverClient());
+    }
+
 }
