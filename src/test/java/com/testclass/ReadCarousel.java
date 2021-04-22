@@ -1,6 +1,7 @@
 package com.testclass;
 
 import core.BaseTest;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.FileNotFoundException;
@@ -18,10 +19,10 @@ public class ReadCarousel extends BaseTest {
     }
 
     @Test(description = "Opens my favourite sites", priority=1)
-    public void test001_OpenMoneyControl() throws Exception {
+    public void test001_OpenNoonSiteReadCarousel() throws Exception {
         pageController.landingPageNoon().gotoLandingPage(url2);
         pageController.landingPageNoon().readRecommendedProductNames();
-
+        Assert.assertEquals("false","true");
     }
 
 

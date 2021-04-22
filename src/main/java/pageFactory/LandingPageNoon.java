@@ -16,7 +16,7 @@ public class LandingPageNoon {
     Set listOfRecommendedProducts = new TreeSet();
     WebDriverClient pageWebDriver;
 
-    @FindBy(xpath = "//h3[contains(text(),'Recommend')]/ancestor::div[@class='sc-jQbIHB gTZZqe']//div[@class='kcs0h5-0 diNcmV grid']")
+    @FindBy(xpath = "//h3[contains(text(),'kjddgdg')]/ancestor::div[@class='sc-jQbIHB gTZZqe']//div[@class='kcs0h5-0 diNcmV grid']")
     List<WebElement> recommendedProductsList;
 
 
@@ -30,7 +30,7 @@ public class LandingPageNoon {
         return pageWebDriver.title();
     }
 
-    public void readRecommendedProductNames() throws Exception {
+    public void readRecommendedProductNames() {
         try {
             listOfRecommendedProducts.addAll(recommendedProductsList.stream().map(s -> s.getAttribute("title")).collect(Collectors.toSet()));
             listOfRecommendedProducts.forEach(s -> System.out.println(s));

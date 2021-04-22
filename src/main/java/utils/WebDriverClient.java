@@ -47,6 +47,7 @@ public class WebDriverClient {
         System.out.println("Navigating to url: " + url);
         myDriver.get(url);
         myDriver.navigate().to(url);
+        myDriver.switchTo().activeElement().click();
     }
 
     public void type(String locator, String value) throws Exception {

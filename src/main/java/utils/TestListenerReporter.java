@@ -1,17 +1,34 @@
 package utils;
 
-import org.testng.IReporter;
+import core.BaseTest;
+import core.Controller;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import java.io.IOException;
+import java.util.Arrays;
 
-public class TestListenerReporter implements ITestListener {
+
+public class TestListenerReporter extends BaseTest implements ITestListener  {
+
+
+   BaseTest bt = null;
 
 
     @Override
     public void onTestFailure(ITestResult result) {
-        System.out.println("F");
+        if (result.getStatus() == ITestResult.FAILURE) {
+            //upcasting of driver object
+            try {
+                takeScreenShot(result, (WebDriver) bt.threadLocal.get());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+                   }
+
     }
 
     @Override
@@ -44,7 +61,7 @@ public class TestListenerReporter implements ITestListener {
         }
 
         System.out.println(
-                "Test completed on: "+"\n" + testContext.getEndDate().toString());
+                "Test completed on: " + "\n" + testContext.getEndDate().toString());
 
 
     }
