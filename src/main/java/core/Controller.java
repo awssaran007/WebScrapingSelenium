@@ -1,36 +1,29 @@
 package core;
 
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.testng.ITestResult;
-import pageFactory.LandingPage;
-import pageFactory.LandingPageNoon;
-import utils.WebDriverClient;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import pages.LandingPage;
+import pages.LandingPageNoon;
+import driver.DriverManager;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
+import java.sql.Driver;
 
-import static java.lang.System.out;
+import static org.openqa.selenium.support.PageFactory.initElements;
 
 public class Controller {
-    //this class is the object factory for pagebjects
-    WebDriverClient pageWebDriver = null;
 
-    public Controller(WebDriver controllerDriver) {
-        pageWebDriver = new WebDriverClient(controllerDriver);
-
+    public Controller() {
+               initElements(new AjaxElementLocatorFactory(DriverManager.getWebDriverClient(),5), this);
     }
 
+
     public LandingPage landingPage() {
-        return new LandingPage(pageWebDriver.getWebDriverClient());
+        return new LandingPage();
     }
 
     public LandingPageNoon landingPageNoon() {
-        return new LandingPageNoon(pageWebDriver.getWebDriverClient());
+        return new LandingPageNoon();
     }
 
 

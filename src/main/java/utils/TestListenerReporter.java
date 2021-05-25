@@ -1,68 +1,90 @@
 package utils;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import core.BaseTest;
-import core.Controller;
-import org.apache.commons.io.FileUtils;
+import driver.DriverManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
-public class TestListenerReporter extends BaseTest implements ITestListener  {
+public class TestListenerReporter extends CaptureScreenShot implements ITestListener{
 
 
-   BaseTest bt = null;
+    private ExtentTest test;
+    private String actualImageName;
+    private static final ExtentReports extent;
+    private static Calendar calendar;
+    private static SimpleDateFormat formatter;
+
+
+    private static final Logger logger = LogManager.getLogger(TestListenerReporter.class);
+
+    public TestListenerReporter() {
+
+    }
+
+
+
+    static {
+        calendar = Calendar.getInstance();
+        formatter = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
+        extent = new ExtentReports(System.getProperty("user.dir") + "/src/test/java/com/reports/"
+                + formatter.format(calendar.getTime()) + ".html", false);
+    }
+
+
 
 
     @Override
     public void onTestFailure(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            //upcasting of driver object
-            try {
-                takeScreenShot(result, (WebDriver) bt.threadLocal.get());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-                   }
 
-    }
+        try {
+            actualImageName = takeScreenShot();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        test.log(LogStatus.FAIL, result.getName() + " test is failed" + result.getThrowable());
+        test.log(LogStatus.FAIL, test.addScreenCapture(actualImageName));
 
-    @Override
-    public void onStart(ITestContext context) {
-        System.out.println("---------Test suite started---------");
     }
 
 
     @Override
-    public void onTestFailedWithTimeout(ITestResult result) {
-        System.out.println("Tests Failed due to time out");
+    public void onStart(ITestContext context) {
+
+        test = extent.startTest(context.getName());
+        test.log(LogStatus.INFO, context.getName() + " test Started");
     }
 
 
-    public void onFinish(ITestContext testContext) {
-        if (testContext.getPassedTests().size() != 0) {
-            System.out.println("==== PASSED TEST CASES ====");
-            testContext.getPassedTests().getAllResults()
-                    .forEach(result -> {
-                        System.out.println(result.getName());
-                    });
+    @Override
+    public void onTestSuccess(ITestResult result) {
+        if (result.getStatus() == ITestResult.SUCCESS) {
+            test.log(LogStatus.PASS, result.getName() + " test is pass");
         }
-        if (testContext.getFailedTests().size() != 0) {
-            System.out.println("==== FAILED TEST CASES ====");
-            testContext.getFailedTests().getAllResults()
-                    .forEach(result -> {
-                                System.out.println(result.getName());
-                            }
-                    );
-        }
-
-        System.out.println(
-                "Test completed on: " + "\n" + testContext.getEndDate().toString());
-
-
     }
+
+
+    @Override
+    public void onTestSkipped(ITestResult result) {
+        if (result.getStatus() == ITestResult.SKIP) {
+            test.log(LogStatus.SKIP, result.getName() + " test is skipped and skip reason is:-" + result.getThrowable());
+            logger.error(result.getTestClass().getTestName());
+            logger.error(result.getThrowable());
+        }
+    }
+
+
 }
+
+

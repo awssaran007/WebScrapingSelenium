@@ -23,19 +23,14 @@ public class FindTopGainers extends BaseTest {
 
     public FindTopGainers() throws FileNotFoundException {
        url1 = rx.readConfig().get("url1");
-       url2 = rx.readConfig().get("url2");
-       mctitle = rx.readConfig().get("mctitile");
+       mctitle = rx.readConfig().get("mctitle");
     }
 
     @Test(description = "Opens my favourite sites", priority=1)
     public void test001_OpenMoneyControl() throws Exception {
         pageController.landingPage().gotoLandingPage(url1);
-        Thread.sleep(20000);
-
         pageController.landingPage().scrapStockAndValues();
         Assert.assertEquals(driver.getTitle(), mctitle);
-
-
     }
 
     }

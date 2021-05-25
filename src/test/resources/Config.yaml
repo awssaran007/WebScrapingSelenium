@@ -1,4 +1,6 @@
 envName: "QA"
 url1: "https://www.moneycontrol.com/stocks/marketstats/index.php"
 url2: "https://www.noon.com/uae-en/"
+url3: "https://kitchen.applitools.com"
 mctitle: "Stock/Share Market Statistics, Share Market Live Stats, Live Market statistics, F&O Prices, Company Information, Global Markets, Live Stock Market Map"
+kitchenAppli: "The Kitchen"
