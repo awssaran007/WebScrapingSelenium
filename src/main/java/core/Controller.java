@@ -1,32 +1,31 @@
 package core;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
-import pages.LandingPage;
-import pages.LandingPageNoon;
+
 import driver.DriverManager;
+import org.openqa.selenium.WebDriver;
+import pages.MoneyControlMainPage;
+import pages.LandingPageNoon;
+import pages.MoneyControlMainPage2;
+import pages.MultipleWindows;
 
-import java.sql.Driver;
-
-import static org.openqa.selenium.support.PageFactory.initElements;
 
 public class Controller {
 
+    WebDriver driver;
+
     public Controller() {
-               initElements(new AjaxElementLocatorFactory(DriverManager.getWebDriverClient(),5), this);
+        this.driver = DriverManager.getWebDriverClient();
     }
 
-
-    public LandingPage landingPage() {
-        return new LandingPage();
-    }
+    public MoneyControlMainPage moneyControlLandingPage() {return new MoneyControlMainPage(); }
 
     public LandingPageNoon landingPageNoon() {
         return new LandingPageNoon();
     }
 
+    public MultipleWindows landingPageMultipleWindows() { return new MultipleWindows();  }
 
+    public MoneyControlMainPage2 moneyControlLandingPage2() {return new MoneyControlMainPage2(driver); }
 
 }
 

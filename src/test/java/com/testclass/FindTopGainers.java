@@ -17,23 +17,17 @@ import java.util.stream.Stream;
 
 public class FindTopGainers extends BaseTest {
 
-    String url1, url2, url3, mctitle = null;
-
-
 
     public FindTopGainers() throws FileNotFoundException {
-       url1 = rx.readConfig().get("url1");
-       mctitle = rx.readConfig().get("mctitle");
     }
 
-    @Test(description = "Opens my favourite sites", priority=1)
+    @Test(description = "Opens my favourite sites", priority = 1)
     public void test001_OpenMoneyControl() throws Exception {
-        pageController.landingPage().gotoLandingPage(url1);
-        pageController.landingPage().scrapStockAndValues();
-        Assert.assertEquals(driver.getTitle(), mctitle);
+        pageController.moneyControlLandingPage()
+                      .gotoLandingPage(rx.readConfig().get("moneyControlUrl"));
+        pageController.moneyControlLandingPage().scrapStockAndValues();
     }
-
-    }
+}
 
 
 

@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite" parallel="tests" thread-count="99">
-    <test name="Web Scraping">
-        <parameter name="browser" value="CHROME"/>
+
+
+
+    <test name="Web Scrapping">
+        <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="com.testclass.ReadCarousel"/>
+            <class name="com.testclass.FindTopGainers2"/>
         </classes>
     </test>
 
-    <test name="Find Top Gainers">
-        <parameter name="browser" value="firefox"/>
-        <classes>
-            <class name="com.testclass.FindTopGainers"/>
-        </classes>
-    </test>
 
   <!--  <listeners>
         <listener class-name="utils.TestListenerReporter"/>

@@ -38,7 +38,7 @@ public class TestListenerReporter extends CaptureScreenShot implements ITestList
     static {
         calendar = Calendar.getInstance();
         formatter = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
-        extent = new ExtentReports(System.getProperty("user.dir") + "/src/test/java/com/reports/"
+        extent = new ExtentReports(System.getProperty("user.dir") + "\\src\\test\\java\\com\\reports\\"
                 + formatter.format(calendar.getTime()) + ".html", false);
     }
 

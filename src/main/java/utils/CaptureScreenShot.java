@@ -25,13 +25,12 @@ public class CaptureScreenShot {
 
 
 
-
+//823b7435443d4815a274accdee4f7f1f
     protected String takeScreenShot() throws IOException {
 
         try {
             File image = ((TakesScreenshot) DriverManager.getWebDriverClient()).getScreenshotAs(OutputType.FILE);
             String imageLocation = System.getProperty("user.dir") + "\\src\\test\\java\\com\\errorScreenshots\\";
-            out.println(imageLocation);
             actualImageName = imageLocation + "Failure-" + formatter.format(calendar.getTime()) + ".png";
             File destFile = new File(actualImageName);
             FileUtils.copyFile(image, destFile);
