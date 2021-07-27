@@ -1,7 +1,0 @@
-envName: "QA"
-moneyControlUrl: "https://www.moneycontrol.com/stocks/marketstats/index.php"
-noonUrl: "https://www.noon.com/uae-en/"
-appliToolsUrl: "https://kitchen.applitools.com"
-herokuUrlMultiWindow: "https://the-internet.herokuapp.com/windows"
-mctitle: "Stock/Share Market Statistics, Share Market Live Stats, Live Market statistics, F&O Prices, Company Information, Global Markets, Live Stock Market Map"
-kitchenAppli: "The Kitchen"
